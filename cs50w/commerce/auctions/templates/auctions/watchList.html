@@ -1,0 +1,37 @@
+{% extends 'auctions/layout.html' %}
+
+{%block title%}
+    Watched by {{user.username}}
+
+{%endblock%}
+
+<!-- How do i know it's authenticated. How did i access user? -->
+
+{%block body%}
+    <h2 class="heading-main">
+        <button class="btn btn-light self-btn">Watching</button>
+    </h2>
+    <div class="listings-container">
+        {% for item in list %}
+
+            <div class="box">
+                <div class="borderer">
+                    <a href="listing/{{item.listing.id}}" class="listing-link">
+                        {% if item.listing.url %}
+                            <img src="{{item.listing.url}}" alt="{{item.listing.title}}" width="80%" height="120px" class="index-listing">
+                        {%else%}
+                            <div class="image-placeholder">
+                                <span class="image-text">No Image Available</span>
+                            </div>
+                        {%endif%}
+                        <h2>{{item.listing.title}}</h2>
+                        <div><strong>Price</strong>: <strong>$</strong> {{item.listing.bid}}</div>
+                        <div class="datetime">{{item.listing.date}}</div>
+                    </a>
+                </div>
+            </div>
+            {%empty%}
+                <div>Not Watching Any.</div>
+            {%endfor%}
+    </div>
+{% endblock %}
